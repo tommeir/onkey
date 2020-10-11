@@ -294,7 +294,7 @@ readSettings = function () {
       eventAction: 'generate',
       eventLabel: 'exercise generated'
     });
-
+    ga('send', 'pageview');
   }
   return settings;
 };
