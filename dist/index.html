@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - OnKey minimal</title>
+  <meta name="viewport" content="width=device-width">
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons" rel="stylesheet">
+
+<script async src="external/abcjs_basic_5.10.3-min"></script>
+<script async src="external/jquery.min"></script>
+<script async src="external/materialize.min"></script>
+<script async src="external/select.js"></script>
+<script async src="external/tonal.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-150569234-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-150569234-1');
+</script>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
+<link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<main>
+
+  <div class="flip-container">
+    <div class="flipper">
+      <div class="front">
+        <div class="card container hoverable myformcard">
+
+          <div class="card-content">
+            <div class="">
+              <form>
+                <div class="row center-align">
+                  <div class="flow-text">
+                    I want to practice a
+                    <div class="input-field inline">
+                      <select id="tonic">
+                        <option value=undefined disabled>Choose Tonic</option>
+                        <option value="Cb">Cb</option>
+                        <option selected="selected" value="C">C</option>
+                        <option value="C#">C#</option>
+                        <option value="Db">Db</option>
+                        <option value="D">D</option>
+                        <option value="D#">D#</option>
+                        <option value="Eb">Eb</option>
+                        <option value="E">E</option>
+                        <option value="E#">E#</option>
+                        <option value="Fb">Fb</option>
+                        <option value="F">F</option>
+                        <option value="F#">F#</option>
+                        <option value="Gb">Gb</option>
+                        <option value="G">G</option>
+                        <option value="G#">G#</option>
+                        <option value="Ab">Ab</option>
+                        <option value="A">A</option>
+                        <option value="A#">A#</option>
+                        <option value="Bb">Bb</option>
+                        <option value="B">B</option>
+                        <option value="B^">B#</option>
+                      </select>
+                      <label for="tonic">Select Tonic</label>
+                    </div>
+                    <div class="input-field inline">
+                      <select id="scale">
+                        <option value="" disabled>Choose Scale type</option>
+                        <option value="major" selected selected="selected">Major Scale</option>
+                        <option value="minor">Minor Scale</option>
+                      </select>
+                      <label for="tonic">Select Scale</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row center-align flow-text secondrow valign-wrapper">
+                  <div class="inline col s1 offset-s1">From</div>
+                  <div class="inline col s2">
+                    <div class="startnote_wrapper">
+                      <div id="startnote_paper" class="valign-wrapper inline"></div>
+                    </div>
+                  </div>
+                  <div class="input-field col s1 valign-wrapper inline">
+                    <div class="row">
+                      <a id="startnoteup" class="btn-floating btn-small waves-effect waves-dark white"><i class="material-icons black-text">keyboard_arrow_up</i></a>
+                    </div>
+                    <div class="row">
+                      <a id="startnotedown" class="btn-floating btn-small waves-effect waves-dark white"><i class="material-icons black-text">keyboard_arrow_down</i></a>
+
+                    </div>
+
+                    <select id="startnote" class="hide" style="display: none;">
+
+                      <option value="_G,,">Gb2</option>
+                      <option value="G,,">G2</option>
+                      <option value="^G,,">G#2</option>
+                      <option value="_A,,">Ab2</option>
+                      <option value="A,,">A2</option>
+                      <option value="^A,,">A#2</option>
+                      <option value="_B,,">Bb2</option>
+                      <option value="B,,">B2</option>
+                      <option value="^B,,">B#2</option>
+                      <option value="_C,">Cb3</option>
+                      <option value="C,">C3</option>
+                      <option value="^C,">C#3</option>
+                      <option value="_D,">Db3</option>
+                      <option value="D,">D3</option>
+                      <option value="^D,">D#3</option>
+                      <option value="_E,">Eb3</option>
+                      <option value="E,">E3</option>
+                      <option value="^E,">E#3</option>
+                      <option value="_F,">Fb3</option>
+                      <option value="F,">F3</option>
+                      <option value="^F,">F#3</option>
+                      <option value="_G,">Gb3</option>
+                      <option value="G,">G3</option>
+                      <option value="^G,">G#3</option>
+                      <option value="_A,">Ab3</option>
+                      <option value="A,">A3</option>
+                      <option value="^A,">A#3</option>
+                      <option value="_B,">Bb3</option>
+                      <option value="B,">B3</option>
+                      <option value="^B,">B#3</option>
+                      <option value="_C">Cb4</option>
+                      <option selected="selected" value="C">C4</option>
+                      <option value="^C">C#4</option>
+                      <option value="_D">Db4</option>
+                      <option value="D">D4</option>
+                      <option value="^D">D#4</option>
+                      <option value="_E">Eb4</option>
+                      <option value="E">E4</option>
+                      <option value="^E">E#4</option>
+                      <option value="_F">Fb4</option>
+                      <option value="F">F4</option>
+                      <option value="^F">F#4</option>
+                      <option value="_G">Gb4</option>
+                      <option value="G">G4</option>
+                      <option value="^G">G#4</option>
+                      <option value="_A">Ab4</option>
+                      <option value="A">A4</option>
+                      <option value="^A">A#4</option>
+                      <option value="_B">Bb4</option>
+                      <option value="B">B4</option>
+                      <option value="^B">B#4</option>
+                      <option value="_C'">Cb5</option>
+                      <option value="C'">C5</option>
+                      <option value="^C'">C#5</option>
+                      <option value="_D'">Db5</option>
+                      <option value="D'">D5</option>
+                      <option value="^D'">D#5</option>
+                      <option value="_E'">Eb5</option>
+                      <option value="E'">E5</option>
+                      <option value="^E'">E#5</option>
+                      <option value="_F'">Fb5</option>
+                      <option value="F'">F5</option>
+                      <option value="^F'">F#5</option>
+                      <option value="_G'">Gb5</option>
+                      <option value="G'">G5</option>
+                      <option value="^G'">G#5</option>
+                      <option value="_A'">Ab5</option>
+                      <option value="A'">A5</option>
+                      <option value="^A'">A#5</option>
+                      <option value="_B'">Bb5</option>
+                      <option value="B'">B5</option>
+                      <option value="^B'">B#5</option>
+                      <option value="_C''">Cb6</option>
+                      <option value="C''">C6</option>
+                      <option value="^C''">C#6</option>
+                      <option value="_D''">Db6</option>
+                      <option value="D''">D6</option>
+                      <option value="^D''">D#6</option>
+                      <option value="_E''">Eb6</option>
+                      <option value="E''">E6</option>
+                      <option value="^E''">E#6</option>
+                      <option value="_F''">Fb6</option>
+                      <option value="F''">F6</option>
+                      <option value="^F''">F#6</option>
+                      <option value="_G''">Gb6</option>
+                      <option value="G''">G6</option>
+                      <option value="^G''">G#6</option>
+                      <option value="_A''">Ab6</option>
+                      <option value="A''">A6</option>
+                      <option value="^A''">A#6</option>
+                      <option value="_B''">Bb6</option>
+                      <option value="B''">B6</option>
+                      <option value="^B''">B#6</option>
+                      <option value="_C'''">Cb7</option>
+                      <option value="C'''">C7</option>
+                      <option value="^C'''">C#7</option>
+                      <option value="_D'''">Db7</option>
+                      <option value="D'''">D7</option>
+                      <option value="^D'''">D#7</option>
+                      <option value="_E'''">Eb7</option>
+                      <option value="E'''">E7</option>
+                      <option value="^E'''">E#7</option>
+
+                    </select>
+                  </div>
+                  <div class="inline col s1 offset-m1">To</div>
+                  <div class="inline col s2 ">
+                    <div id="endnote_paper" class="valign-wrapper inline"></div>
+                  </div>
+                  <div class="input-field  valign-wrapper inline col s1">
+                    <div class="row">
+                      <a id="endnoteup" class="btn-floating btn-small waves-effect waves-dark white"><i class="material-icons black-text">keyboard_arrow_up</i></a>
+                    </div>
+                    <div class="row">
+                      <a id="endnotedown" class="btn-floating btn-small waves-effect waves-dark white"><i class="material-icons black-text">keyboard_arrow_down</i></a>
+
+                    </div>
+
+                    <select id="endnote" class="hide" style="display: none;">
+                      <option value="_G,,">Gb2</option>
+                      <option value="G,,">G2</option>
+                      <option value="^G,,">G#2</option>
+                      <option value="_A,,">Ab2</option>
+                      <option value="A,,">A2</option>
+                      <option value="^A,,">A#2</option>
+                      <option value="_B,,">Bb2</option>
+                      <option value="B,,">B2</option>
+                      <option value="^B,,">B#2</option>
+                      <option value="_C,">Cb3</option>
+                      <option value="C,">C3</option>
+                      <option value="^C,">C#3</option>
+                      <option value="_D,">Db3</option>
+                      <option value="D,">D3</option>
+                      <option value="^D,">D#3</option>
+                      <option value="_E,">Eb3</option>
+                      <option value="E,">E3</option>
+                      <option value="^E,">E#3</option>
+                      <option value="_F,">Fb3</option>
+                      <option value="F,">F3</option>
+                      <option value="^F,">F#3</option>
+                      <option value="_G,">Gb3</option>
+                      <option value="G,">G3</option>
+                      <option value="^G,">G#3</option>
+                      <option value="_A,">Ab3</option>
+                      <option value="A,">A3</option>
+                      <option value="^A,">A#3</option>
+                      <option value="_B,">Bb3</option>
+                      <option value="B,">B3</option>
+                      <option value="^B,">B#3</option>
+                      <option value="_C">Cb4</option>
+                      <option value="C">C4</option>
+                      <option value="^C">C#4</option>
+                      <option value="_D">Db4</option>
+                      <option value="D">D4</option>
+                      <option value="^D">D#4</option>
+                      <option value="_E">Eb4</option>
+                      <option value="E">E4</option>
+                      <option value="^E">E#4</option>
+                      <option value="_F">Fb4</option>
+                      <option value="F">F4</option>
+                      <option value="^F">F#4</option>
+                      <option value="_G">Gb4</option>
+                      <option value="G">G4</option>
+                      <option value="^G">G#4</option>
+                      <option value="_A">Ab4</option>
+                      <option value="A">A4</option>
+                      <option value="^A">A#4</option>
+                      <option value="_B">Bb4</option>
+                      <option value="B">B4</option>
+                      <option value="^B">B#4</option>
+                      <option value="_C'">Cb5</option>
+                      <option value="C'">C5</option>
+                      <option value="^C'">C#5</option>
+                      <option value="_D'">Db5</option>
+                      <option value="D'">D5</option>
+                      <option value="^D'">D#5</option>
+                      <option value="_E'">Eb5</option>
+                      <option selected="selected" value="E'">E5</option>
+                      <option value="^E'">E#5</option>
+                      <option value="_F'">Fb5</option>
+                      <option value="F'">F5</option>
+                      <option value="^F'">F#5</option>
+                      <option value="_G'">Gb5</option>
+                      <option value="G'">G5</option>
+                      <option value="^G'">G#5</option>
+                      <option value="_A'">Ab5</option>
+                      <option value="A'">A5</option>
+                      <option value="^A'">A#5</option>
+                      <option value="_B'">Bb5</option>
+                      <option value="B'">B5</option>
+                      <option value="^B'">B#5</option>
+                      <option value="_C''">Cb6</option>
+                      <option value="C''">C6</option>
+                      <option value="^C''">C#6</option>
+                      <option value="_D''">Db6</option>
+                      <option value="D''">D6</option>
+                      <option value="^D''">D#6</option>
+                      <option value="_E''">Eb6</option>
+                      <option value="E''">E6</option>
+                      <option value="^E''">E#6</option>
+                      <option value="_F''">Fb6</option>
+                      <option value="F''">F6</option>
+                      <option value="^F''">F#6</option>
+                      <option value="_G''">Gb6</option>
+                      <option value="G''">G6</option>
+                      <option value="^G''">G#6</option>
+                      <option value="_A''">Ab6</option>
+                      <option value="A''">A6</option>
+                      <option value="^A''">A#6</option>
+                      <option value="_B''">Bb6</option>
+                      <option value="B''">B6</option>
+                      <option value="^B''">B#6</option>
+                      <option value="_C'''">Cb7</option>
+                      <option value="C'''">C7</option>
+                      <option value="^C'''">C#7</option>
+                      <option value="_D'''">Db7</option>
+                      <option value="D'''">D7</option>
+                      <option value="^D'''">D#7</option>
+                      <option value="_E'''">Eb7</option>
+                      <option value="E'''">E7</option>
+                      <option value="^E'''">E#7</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row center-align flow-text">
+                  <span class="inline">
+                    Pattern:
+                  </span>
+                  <div class="input-field inline">
+                    <select id="savedpattern">
+                      <option value="" disabled selected>Choose your option</option>
+                      <option value="default" selected="selected">Default</option>
+                      <option value="three_note_group">3 note group</option>
+                      <option value="four_note_group">4 note group</option>
+                      <option value="skip_up_step_down">Skip up step down</option>
+                      <option value="diatonic_triads">Diatonic triads</option>
+                      <option value="diatonic_7th_chord">Diatonic 7th chords</option>
+                      <option value="octaves">Octaves</option>
+                    </select>
+                    <label>Select Pattern</label>
+
+                  </div>
+
+                  <div class="inline input-field">
+                    <button id="exegen" class="btn-floating btn waves-effect waves-light teal"><i class="material-icons">music_note</i></button>
+
+                  </div>
+
+                </div>
+                <div class="card-action right-align">
+                  <i class="material-icons">copyright</i> 2020, Rea & Tom Meir
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="back">
+        <div class="card container hoverable myresultcard">
+          <div class="card-content">
+            <a id="btn-back" class="btn-floating waves-effect waves-light teal">
+              <i class="material-icons">undo</i>
+            </a>
+            <div class="row">
+              <div id="warnings"></div>
+              <div class="render-area">
+                <div>
+                  <div id="paper"></div>
+                </div>
+                <div>
+                  <div id="midi"></div>
+                </div>
+              </div>
+
+              <div class="composition__wrapper">
+
+                <textarea class="composition" id="composition" cols="80" rows="15" style="display: none;"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script src='https://cdn.jsdelivr.net/gh/tonaljs/v2@master/dist/tonal.min.js'></script>
+<script src='https://raw.githack.com/paulrosen/abcjs/master/bin/abcjs_basic_5.10.3-min.js'></script>
+<script src='https://raw.githack.com/Dogfalo/materialize/v1-dev/js/select.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
