@@ -287,13 +287,15 @@ readSettings = function () {
       metric1: settings.tonal_bottomnote.midi,
       metric2: settings.tonal_topnote.midi
     });
-  }
+  
 
-  ga('send', 'event', {
-    eventCategory: 'engagement',
-    eventAction: 'generate',
-    eventLabel: 'exercise generated'
-  });
+    ga('send', 'event', {
+      eventCategory: 'engagement',
+      eventAction: 'generate',
+      eventLabel: 'exercise generated'
+    });
+
+  }
   return settings;
 };
 
