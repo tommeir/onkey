@@ -276,6 +276,24 @@ readSettings = function () {
     settings.index_of_low_tonic_in_range = 0;
   }
 
+  //set GA event for analytics:
+  if (typeof ga === 'function') {
+    ga('set', {
+      //userId: __userID__,
+      dimension1: settings.tonic,
+      dimension2: settings.scale,
+      dimension3: settings.patterns_scale.toString(),
+      dimension4: settings.clef,
+      metric1: settings.tonal_bottomnote.midi,
+      metric2: settings.tonal_topnote.midi
+    });
+  }
+
+  ga('send', 'event', {
+    eventCategory: 'engagement',
+    eventAction: 'generate',
+    eventLabel: 'exercise generated'
+  });
   return settings;
 };
 
