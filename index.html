@@ -20,7 +20,7 @@
   gtag('js', new Date());
   
   gtag('config', 'UA-150569234-1');
-  ga('send', 'pageview');
+  
 </script>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
 <link rel="stylesheet" href="./style.css">
@@ -338,7 +338,19 @@
                     <label>Select Pattern</label>
 
                   </div>
-
+                  <span class="inline">
+                    Clef:
+                  </span>
+                  <div class="input-field inline">
+                    <select id="clef">
+                      <option value="" disabled selected>Choose your option</option>
+                      <option value="treble" selected="selected">Treble</option>
+                      <option value="alto">Alto</option>
+                      <option value="tenor">Tenor</option>
+                      <option value="bass">Bass</option>
+                    </select>
+                    <label>Select Clef</label>
+                  </div>
                   <div class="inline input-field">
                     <button id="exegen" class="btn-floating btn waves-effect waves-light teal"><i class="material-icons">music_note</i></button>
 

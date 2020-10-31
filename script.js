@@ -214,9 +214,8 @@ readSettings = function () {
   settings = {};
 
   $savedpattern = $$("savedpattern");
-  settings.patterns_scale =
-    packaged_patterns[$savedpattern.options[$savedpattern.selectedIndex].value];
-  settings.clef = "treble"; // also can be alto, tenor, or bass.
+  settings.patterns_scale = packaged_patterns[$savedpattern.options[$savedpattern.selectedIndex].value];
+  settings.clef = $$("clef").value;//= "treble"; // also can be alto, tenor, or bass.
   $tonic = $$("tonic");
   settings.tonic = $tonic.options[$tonic.selectedIndex].value;
   $scale = $$("scale");
