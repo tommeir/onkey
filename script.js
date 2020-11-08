@@ -1,6 +1,7 @@
 //abcjs in production url should be https://rawcdn.githack.com/paulrosen/abcjs/f9ab28cee87a7023c7e374c3481cb6cadc0c192c/bin/abcjs_basic_5.10.3-min.js
 
-var abc_start, abc_end, $$, $val, setCaretPosition, packaged_patterns;
+var abc_start, abc_end, $$, $val, setCaretPosition, abc_start_text,
+abc_end_text, packaged_patterns,oldclef = "treble";;
 
 $$ = function (id) {
   return document.getElementById(id);
@@ -18,15 +19,17 @@ document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".modal");
   var instances = M.Modal.init(elems);
   //M.AutoInit();
+  abc_start_text = "L:1/4 \nM: \n ";
+  abc_end_text = "L:1/4 \nM: \n ";
   abc_start = ABCJS.renderAbc(
     "startnote_paper",
-    "L:1/4 \nM: \n C",
+    abc_start_text + $val("startnote"),
     {},
     { staffwidth: 75, responsive: "resize", add_classes: true }
   );
   abc_end = ABCJS.renderAbc(
     "endnote_paper",
-    "L:1/4 \nM: \n E'",
+    abc_end_text + $val("endnote"),
     {},
     { staffwidth: 75, responsive: "resize", add_classes: true }
   );
@@ -35,6 +38,124 @@ document.addEventListener("DOMContentLoaded", function () {
     paper_id: "paper",
     warnings_id: "warnings"
   });
+});
+
+$$("clef").addEventListener("change", function (e) {
+  
+  if(e.target.value == 'bass') {
+    //update start note to E2
+    var nextElement = $("#startnote > option[value='E,,']");
+    $("#startnote").val('E,,');
+    var this_select = document.querySelectorAll("#startnote");
+    M.FormSelect.init(this_select, { classes: "hide" });
+    abc_start = ABCJS.renderAbc(
+      "startnote_paper",
+      "K:clef=" + $val("clef") + " " + abc_start_text + nextElement[0].value,
+      {},
+      { staffwidth: 75, responsive: "resize", add_classes: true }
+    );
+    //update end note to G3
+    var nextElement = $("#endnote > option[value='G,']");
+    $("#endnote").val('G,');
+    var this_select = document.querySelectorAll("#endnote");
+    M.FormSelect.init(this_select, { classes: "hide" });
+    abc_end = ABCJS.renderAbc(
+      "endnote_paper",
+      "K:clef=" + $val("clef") + " " + abc_end_text + nextElement[0].value,
+      {},
+      { staffwidth: 75, responsive: "resize", add_classes: true }
+    );    
+
+  }  
+  if(e.target.value == 'treble') {
+    //update start note to E2
+    var nextElement = $('#startnote > option[value="C"]');
+    $("#startnote").val("C");
+    var this_select = document.querySelectorAll("#startnote");
+    M.FormSelect.init(this_select, { classes: "hide" });
+    abc_start = ABCJS.renderAbc(
+      "startnote_paper",
+      "K:clef=" + $val("clef") + " " + abc_start_text + nextElement[0].value,
+      {},
+      { staffwidth: 75, responsive: "resize", add_classes: true }
+    );
+    //update end note to G3
+    var nextElement = $('#endnote > option[value="E\'"]');
+    $("#endnote").val("E\'");
+    var this_select = document.querySelectorAll("#endnote");
+    M.FormSelect.init(this_select, { classes: "hide" });
+    abc_end = ABCJS.renderAbc(
+      "endnote_paper",
+      "K:clef=" + $val("clef") + " " + abc_end_text + nextElement[0].value,
+      {},
+      { staffwidth: 75, responsive: "resize", add_classes: true }
+    );    
+
+  }
+  if(e.target.value == 'alto') {
+    //update start note to E2
+    var nextElement = $('#startnote > option[value="D,"]');
+    $("#startnote").val("D,");
+    var this_select = document.querySelectorAll("#startnote");
+    M.FormSelect.init(this_select, { classes: "hide" });
+    abc_start = ABCJS.renderAbc(
+      "startnote_paper",
+      "K:clef=" + $val("clef") + " " + abc_start_text + nextElement[0].value,
+      {},
+      { staffwidth: 75, responsive: "resize", add_classes: true }
+    );
+    //update end note to G3
+    var nextElement = $('#endnote > option[value="F"]');
+    $("#endnote").val("F");
+    var this_select = document.querySelectorAll("#endnote");
+    M.FormSelect.init(this_select, { classes: "hide" });
+    abc_end = ABCJS.renderAbc(
+      "endnote_paper",
+      "K:clef=" + $val("clef") + " " + abc_end_text + nextElement[0].value,
+      {},
+      { staffwidth: 75, responsive: "resize", add_classes: true }
+    );    
+
+  }
+  if(e.target.value == 'tenor') {
+    //update start note to E2
+    var nextElement = $('#startnote > option[value="B,,"]');
+    $("#startnote").val("B,,");
+    var this_select = document.querySelectorAll("#startnote");
+    M.FormSelect.init(this_select, { classes: "hide" });
+    abc_start = ABCJS.renderAbc(
+      "startnote_paper",
+      "K:clef=" + $val("clef") + " " + abc_start_text + nextElement[0].value,
+      {},
+      { staffwidth: 75, responsive: "resize", add_classes: true }
+    );
+    //update end note to G3
+    var nextElement = $('#endnote > option[value="D"]');
+    $("#endnote").val("D");
+    var this_select = document.querySelectorAll("#endnote");
+    M.FormSelect.init(this_select, { classes: "hide" });
+    abc_end = ABCJS.renderAbc(
+      "endnote_paper",
+      "K:clef=" + $val("clef") + " " + abc_end_text + nextElement[0].value,
+      {},
+      { staffwidth: 75, responsive: "resize", add_classes: true }
+    );    
+
+  }
+  
+  abc_start = ABCJS.renderAbc(
+    "startnote_paper",
+    "K:clef=" + this.value + " " + abc_start_text + $val("startnote"),
+    {},
+    { staffwidth: 75, responsive: "resize", add_classes: true }
+  );
+  abc_end = ABCJS.renderAbc(
+    "endnote_paper",
+    "K:clef=" + this.value + " " + abc_end_text + $val("endnote"),
+    {},
+    { staffwidth: 75, responsive: "resize", add_classes: true }
+  );
+  oldclef = e.target.value;
 });
 
 $$("exegen").addEventListener("click", function (e) {
@@ -58,7 +179,7 @@ $("#startnoteup").click(function () {
     M.FormSelect.init(this_select, { classes: "hide" });
     abc_start = ABCJS.renderAbc(
       "startnote_paper",
-      "L:1/4 \nM: \n " + nextElement[0].value,
+      "K:clef=" + $val("clef") + " " + abc_start_text + nextElement[0].value,
       {},
       { staffwidth: 75, responsive: "resize", add_classes: true }
     );
@@ -74,7 +195,7 @@ $("#startnotedown").click(function () {
 
     abc_start = ABCJS.renderAbc(
       "startnote_paper",
-      "L:1/4 \nM: \n " + nextElement[0].value,
+      "K:clef=" + $val("clef") + " " + abc_start_text + nextElement[0].value,
       {},
       { staffwidth: 75, responsive: "resize", add_classes: true }
     );
@@ -89,7 +210,7 @@ $("#endnoteup").click(function () {
     M.FormSelect.init(this_select, { classes: "hide" });
     abc_start = ABCJS.renderAbc(
       "endnote_paper",
-      "L:1/4 \nM: \n " + nextElement[0].value,
+      "K:clef=" + $val("clef") + " " + abc_end_text + nextElement[0].value,
       {},
       { staffwidth: 75, responsive: "resize", add_classes: true }
     );
@@ -108,7 +229,7 @@ $("#endnotedown").click(function () {
 
     abc_start = ABCJS.renderAbc(
       "endnote_paper",
-      "L:1/4 \nM: \n " + nextElement[0].value,
+      "K:clef=" + $val("clef") + " " + abc_end_text + nextElement[0].value,
       {},
       { staffwidth: 75, responsive: "resize", add_classes: true }
     );
@@ -215,7 +336,7 @@ readSettings = function () {
 
   $savedpattern = $$("savedpattern");
   settings.patterns_scale = packaged_patterns[$savedpattern.options[$savedpattern.selectedIndex].value];
-  settings.clef = $$("clef").value;//= "treble"; // also can be alto, tenor, or bass.
+  settings.clef = $val("clef"); //= "treble"; // also can be alto, tenor, or bass.
   $tonic = $$("tonic");
   settings.tonic = $tonic.options[$tonic.selectedIndex].value;
   $scale = $$("scale");
