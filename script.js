@@ -243,6 +243,7 @@ exeGenerate = function () {
 
   var exegen = []; //new result var in tonal notes objects array format.
   _current_note_pointer = settings.index_of_low_tonic_in_range;
+  settings.options_arr = settings.new_options_arr;
   exegen.push(settings.options_arr[settings.index_of_low_tonic_in_range]); //Step 2 "print" first note.
 
   //Step 3 Run the pattern until reaching end of range:
@@ -349,46 +350,60 @@ readSettings = function () {
   settings.row_count = 2;
   settings.unit = "1/4";
 
+  var z;
+  settings.new_options_arr = []; 
+  var _keynum = 0;
+  if(Tonal.Scale.notes(settings.tonic +" "+ settings.scale).length == 0) {
+	_keynum = Tonal.Chord.notes(settings.tonic +" "+ settings.scale).length;
+	for(z =0; z < 9; z++) {  
+	  settings.new_options_arr = settings.new_options_arr.concat(Tonal.Chord.notes(settings.tonic +" "+ settings.scale));
+    }  
+  }else{
+	_keynum = Tonal.Scale.notes(settings.tonic +" "+ settings.scale).length;
+	for(z =0; z < 9; z++) {  
+	  settings.new_options_arr = settings.new_options_arr.concat(Tonal.Scale.notes(settings.tonic +" "+ settings.scale));
+    }
+  }
+
+  z = 0;
+  settings.new_options_arr[0] = settings.new_options_arr[0] + z;
+  
+  settings.new_options_arr.forEach(function(_element, _index, _new_options_arr) {	 
+    if (_index == 0 ) return;
+	
+	_new_options_arr[_index] = _new_options_arr[_index] + z;
+	
+	if(Tonal.note(_new_options_arr[_index]).midi < Tonal.note(_new_options_arr[_index-1]).midi ) {
+		z = z +1;
+		_new_options_arr[_index] = _new_options_arr[_index].slice(0,-1) + z;
+	}
+
+  });
+
+  //trim options from below range:
+  var _iz  = Tonal.note(settings.new_options_arr[0]);
+  while(_iz.midi < settings.tonal_bottomnote.midi) {
+	  settings.new_options_arr.shift();
+	  _iz = Tonal.note(settings.new_options_arr[0]);
+	  
+  }
+  //trim options from above range:
+  _iz = Tonal.note(settings.new_options_arr[settings.new_options_arr.length-1]);
+  while(_iz.midi > settings.tonal_topnote.midi) {
+	  settings.new_options_arr.pop();
+	  _iz = Tonal.note(settings.new_options_arr[settings.new_options_arr.length-1]);
+	  
+  }
+
+  //end of new log, old one :
   //start build array of all optional notes:
   settings.options_arr = [];
-  settings.options_arr = settings.options_arr.concat(
-    Tonal.scale($scale.options[$scale.selectedIndex].value).map(
-      Tonal.transpose(
-        $tonic.options[$tonic.selectedIndex].value +
-          parseInt(settings.tonal_bottomnote.octStr - 1)
-      )
-    )
-  );
-  for (
-    let i = settings.tonal_bottomnote.octStr;
-    i < parseInt(settings.tonal_topnote.octStr) + 1;
-    i++
-  ) {
-    settings.options_arr = settings.options_arr.concat(
-      Tonal.scale($scale.options[$scale.selectedIndex].value).map(
-        Tonal.transpose($tonic.options[$tonic.selectedIndex].value + i)
-      )
-    );
-  }
-
-  // trim options_arr notes from start of array until they are above or equal startnote in midi value.
-  while (
-    Tonal.note(settings.options_arr[0]).midi < settings.tonal_bottomnote.midi
-  ) {
-    settings.options_arr.shift();
-  }
-
-  //trim options_arr notes from end of array until they are below or equal endnote in midi value.
-  while (
-    Tonal.note(settings.options_arr[settings.options_arr.length - 1]).midi >
-    settings.tonal_topnote.midi
-  ) {
-    settings.options_arr.pop();
-  }
+  
   //settings.options_arr now is all allowed keys. Starting not from start tonic, but with first scale note in range.
 
+  //using new logic, get low tonic in range:
   settings.index_of_low_tonic_in_range = _index_of_low_tonic_in_range(
-    settings.options_arr,
+    settings.new_options_arr,
     settings.tonic
   ); //step 1 find lowest tonic in range (between highest and lowest notes). If tonic not in range start on lowest note in scale in range+warning msg.
   if (settings.index_of_low_tonic_in_range < 0) {
