@@ -625,5 +625,5 @@ packaged_patterns = {
   skip_up_step_down: [2, -1],
   diatonic_triads: [2, 2, -3],
   diatonic_7th_chord: [2, 2, 2, -5],
-  octaves: [1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1]
+  octaves: [1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1]
 };
